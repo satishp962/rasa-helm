@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.rasa.name | quote }}
+  name: {{ .Values.rasa.name | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.rasa.name | quote }}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Values.rasa.name | quote }}
+    spec:
+      containers:
+      - image: "{{ .Values.rasa.image }}:{{ .Values.rasa.tag }}"
+        name: rasa-nlu-server
+        resources: {}
+        args:
+        - run
+        - --enable-api
+        - --port
+        - "{{ .Values.rasa.port }}"
+        - --auth-token
+        - "{{ .Values.rasa.token }}"
+        - --cors
+        - '*'
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets }}
+status: {}

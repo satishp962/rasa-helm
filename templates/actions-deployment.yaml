@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.actions.name | quote }}
+  name: {{ .Values.actions.name | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.actions.name | quote }}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Values.actions.name | quote }}
+    spec:
+      containers:
+      - image: "{{ .Values.actions.image }}:{{ .Values.actions.tag }}"
+        name: rasa-actions-server
+        resources: {}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets }}
+status: {}

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.rasa.name | quote }}
+  name: {{ .Values.rasa.name | quote }}
+spec:
+  ports:
+  - port: 5005
+    protocol: TCP
+    targetPort: 5005
+  selector:
+    app: {{ .Values.rasa.name | quote }}
+  type: LoadBalancer
+status:
+  loadBalancer: {}

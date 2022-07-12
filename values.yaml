@@ -1,0 +1,18 @@
+imagePullSecrets: "regcred"
+
+rasa:
+  name: "rasa-nlu"
+  image: "gcr.io/xxxx/rasa-nlu-server"
+  tag: "latest"
+  port: 5005
+  token: "rasaToken"
+
+actions:
+  name: "rasa-actions"
+  image: "gcr.io/xxxx/rasa-actions-server"
+  tag: "latest"
+
+duckling:
+  name: "rasa-duckling"
+  image: "rasa/duckling"
+  tag: "latest"
